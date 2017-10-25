@@ -18,6 +18,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import android.os.Environment;
+import android.util.Log;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 
 public class Main extends Activity implements SensorEventListener {
@@ -89,6 +98,25 @@ public class Main extends Activity implements SensorEventListener {
             } else {
                 iv.setVisibility(View.INVISIBLE);
             }
+        }
+        String entry = ((TextView)findViewById(R.id.x_axis)).getText().toString() + "," + ((TextView)findViewById(R.id.y_axis)).getText().toString() + "," + ((TextView)findViewById(R.id.y_axis)).getText().toString() + ",";
+        try {
+
+            File sdCard = Environment.getExternalStorageDirectory();
+            File dir = new File(sdCard.getAbsolutePath() + "/downloads");
+            Boolean dirsMade = dir.mkdir();
+            //System.out.println(dirsMade);
+            Log.v("Accel", dirsMade.toString());
+
+            File file = new File(dir, "output.csv");
+            FileOutputStream f = new FileOutputStream(file, true);
+
+
+
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }
