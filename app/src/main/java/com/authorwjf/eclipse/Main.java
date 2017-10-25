@@ -22,7 +22,10 @@ import android.widget.TextView;
 
 public class Main extends Activity implements SensorEventListener {
     private float mLastX, mLastY, mLastZ;
-    private boolean mInitialized; private SensorManager mSensorManager; private Sensor mAccelerometer; private final float NOISE = (float) 2.0;
+    private boolean mInitialized;
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private final float NOISE = (float) 2.0;
     /** Called when the activity is first created. */
 
     @Override
@@ -46,7 +49,7 @@ public class Main extends Activity implements SensorEventListener {
     }
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-// can be safely ignored for this demo
+// ignore
     }
     @Override
     public void onSensorChanged(SensorEvent event) {
