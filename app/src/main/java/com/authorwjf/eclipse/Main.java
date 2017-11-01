@@ -62,6 +62,9 @@ public class Main extends Activity implements SensorEventListener {
     }
     @Override
     public void onSensorChanged(SensorEvent event) {
+        float deltaX = 0;
+        float deltaY = 0;
+        float deltaZ = 0;
         TextView tvX= (TextView)findViewById(R.id.x_axis);
         TextView tvY= (TextView)findViewById(R.id.y_axis);
         TextView tvZ= (TextView)findViewById(R.id.z_axis);
@@ -78,9 +81,9 @@ public class Main extends Activity implements SensorEventListener {
             tvZ.setText("0.0");
             mInitialized = true;
         } else {
-            float deltaX = Math.abs(mLastX - x);
-            float deltaY = Math.abs(mLastY - y);
-            float deltaZ = Math.abs(mLastZ - z);
+            deltaX = Math.abs(mLastX - x);
+            deltaY = Math.abs(mLastY - y);
+            deltaZ = Math.abs(mLastZ - z);
             if (deltaX < NOISE) deltaX = (float)0.0;
             if (deltaY < NOISE) deltaY = (float)0.0;
             if (deltaZ < NOISE) deltaZ = (float)0.0;
@@ -99,7 +102,7 @@ public class Main extends Activity implements SensorEventListener {
                 iv.setVisibility(View.INVISIBLE);
             }
         }
-        String entry = ((TextView)findViewById(R.id.x_axis)).getText().toString() + "," + ((TextView)findViewById(R.id.y_axis)).getText().toString() + "," + ((TextView)findViewById(R.id.y_axis)).getText().toString() + ",";
+        String entry = Float.toString(deltaX) + "," + Float.toString(deltaY) + "," + Float.toString(deltaZ) + ",";
         try {
 
             File sdCard = Environment.getExternalStorageDirectory();
