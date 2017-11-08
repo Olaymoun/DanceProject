@@ -102,24 +102,17 @@ public class Main extends Activity implements SensorEventListener {
                 iv.setVisibility(View.INVISIBLE);
             }
         }
-        String entry = Float.toString(deltaX) + "," + Float.toString(deltaY) + "," + Float.toString(deltaZ) + ",";
+        String entry = Float.toString(deltaX) + "," + Float.toString(deltaY) + "," + Float.toString(deltaZ) + "\n";
+        String FILENAME = "Accel_log.csv";
         try {
-
-            File sdCard = Environment.getExternalStorageDirectory();
-            File dir = new File(sdCard.getAbsolutePath() + "/downloads");
-            Boolean dirsMade = dir.mkdir();
-            //System.out.println(dirsMade);
-            Log.v("Accel", dirsMade.toString());
-
-            File file = new File(dir, "output.csv");
-            FileOutputStream f = new FileOutputStream(file, true);
-
-
-
-
+            FileOutputStream out = openFileOutput(FILENAME, Context.MODE_APPEND);
+            out.write(entry.getBytes());
+            out.close();
 
         } catch (IOException ex) {
             ex.printStackTrace();
+
         }
+
     }
 }
