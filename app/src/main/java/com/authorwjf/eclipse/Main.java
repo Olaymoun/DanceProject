@@ -18,15 +18,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import android.os.Environment;
 import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 
 public class Main extends Activity implements SensorEventListener {
@@ -35,7 +41,10 @@ public class Main extends Activity implements SensorEventListener {
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private final float NOISE = (float) 2.0;
-    /** Called when the activity is first created. */
+
+    /**
+     * Called when the activity is first created.
+     */
 
     @Override
 
@@ -52,23 +61,26 @@ public class Main extends Activity implements SensorEventListener {
         super.onResume();
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
+
     protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
     }
+
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 // ignore
     }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         float deltaX = 0;
         float deltaY = 0;
         float deltaZ = 0;
-        TextView tvX= (TextView)findViewById(R.id.x_axis);
-        TextView tvY= (TextView)findViewById(R.id.y_axis);
-        TextView tvZ= (TextView)findViewById(R.id.z_axis);
-        ImageView iv = (ImageView)findViewById(R.id.image);
+        TextView tvX = (TextView) findViewById(R.id.x_axis);
+        TextView tvY = (TextView) findViewById(R.id.y_axis);
+        TextView tvZ = (TextView) findViewById(R.id.z_axis);
+        ImageView iv = (ImageView) findViewById(R.id.image);
         float x = event.values[0];
         float y = event.values[1];
         float z = event.values[2];
@@ -84,9 +96,9 @@ public class Main extends Activity implements SensorEventListener {
             deltaX = Math.abs(mLastX - x);
             deltaY = Math.abs(mLastY - y);
             deltaZ = Math.abs(mLastZ - z);
-            if (deltaX < NOISE) deltaX = (float)0.0;
-            if (deltaY < NOISE) deltaY = (float)0.0;
-            if (deltaZ < NOISE) deltaZ = (float)0.0;
+            if (deltaX < NOISE) deltaX = (float) 0.0;
+            if (deltaY < NOISE) deltaY = (float) 0.0;
+            if (deltaZ < NOISE) deltaZ = (float) 0.0;
             mLastX = x;
             mLastY = y;
             mLastZ = z;
@@ -102,7 +114,10 @@ public class Main extends Activity implements SensorEventListener {
                 iv.setVisibility(View.INVISIBLE);
             }
         }
-        String entry = Float.toString(deltaX) + "," + Float.toString(deltaY) + "," + Float.toString(deltaZ) + "\n";
+
+        SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss");
+        String format = date.format(new Date());
+        String entry = Float.toString(deltaX) + "," + Float.toString(deltaY) + "," + Float.toString(deltaZ) + "," + format + "\n";
         String FILENAME = "Accel_log.csv";
         try {
             FileOutputStream out = openFileOutput(FILENAME, Context.MODE_APPEND);
