@@ -1,4 +1,4 @@
-package com.authorwjf.eclipse;
+package com.Acell.eclipse;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

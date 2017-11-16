@@ -1,4 +1,4 @@
-package com.authorwjf.eclipse;
+package com.Acell.eclipse;
 
 import org.junit.Test;
 

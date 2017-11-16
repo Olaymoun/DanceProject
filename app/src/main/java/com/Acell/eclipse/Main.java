@@ -1,36 +1,17 @@
-package com.authorwjf.eclipse;
+package com.Acell.eclipse;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import android.os.Environment;
-import android.util.Log;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.DateFormat;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
