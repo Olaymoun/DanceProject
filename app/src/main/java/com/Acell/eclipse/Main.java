@@ -1,27 +1,31 @@
 package com.Acell.eclipse;
 
-import android.os.Bundle;
-import android.view.View;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class Main extends Activity implements SensorEventListener {
+    private final float NOISE = (float) 2.0;
     private float mLastX, mLastY, mLastZ;
     private boolean mInitialized;
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
-    private final float NOISE = (float) 2.0;
 
     /**
      * Called when the activity is first created.
@@ -99,15 +103,26 @@ public class Main extends Activity implements SensorEventListener {
         SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss");
         String format = date.format(new Date());
         String entry = Float.toString(deltaX) + "," + Float.toString(deltaY) + "," + Float.toString(deltaZ) + "," + format + "\n";
-        String FILENAME = "Accel_log.csv";
-        try {
-            FileOutputStream out = openFileOutput(FILENAME, Context.MODE_APPEND);
-            out.write(entry.getBytes());
-            out.close();
+        String state = Environment.getExternalStorageState();
 
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            File Root = Environment.getExternalStorageDirectory();
+            File Dir = new File(Root.getAbsolutePath() + "/MyAppFile");
+            if (!Dir.exists()) {
+                Dir.mkdir();
+            }
+            File file = new File(Dir, "Accel_log.csv");
 
+            try {
+                FileOutputStream out = new FileOutputStream(file, true);
+                out.write(entry.getBytes());
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            Toast.makeText(getApplicationContext(), "Cannot Save", Toast.LENGTH_LONG).show();
         }
 
     }
