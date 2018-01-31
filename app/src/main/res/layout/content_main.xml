@@ -11,51 +11,108 @@
         android:textStyle="bold"
         android:gravity="center"
         android:text="Shaker Demo"/>
+
     <TableLayout
-        android:paddingTop="10dip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dip"
         android:stretchColumns="*">
+
         <TableRow>
+
             <TextView
+                android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:gravity="center"
                 android:text="X-Axis"
-                android:gravity="center"/>
+                android:textSize="14sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:gravity="center"
 
                 android:text="Y-Axis"
 
-                android:gravity="center"/>
+                android:textSize="14sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:gravity="center"
                 android:text="Z-Axis"
-                android:gravity="center"/>
+                android:textSize="14sp" />
         </TableRow>
+
         <TableRow>
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/x_axis"
-                android:gravity="center"/>
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center" />
+
+            <TextView
                 android:id="@+id/y_axis"
-                android:gravity="center"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/z_axis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+        </TableRow>
+
+        <TableRow>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/z_axis"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="Gyro-X"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Gyro-Y"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Gyro-Z"
+                android:textSize="14sp" />
         </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/gyro_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/gyro_y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/gyro_z"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+        </TableRow>
+
     </TableLayout>
+
     <ImageView
         android:paddingTop="10dip"
         android:layout_width="wrap_content"

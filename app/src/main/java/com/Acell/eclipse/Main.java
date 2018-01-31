@@ -25,7 +25,7 @@ public class Main extends Activity implements SensorEventListener {
     private float mLastX, mLastY, mLastZ;
     private boolean mInitialized;
     private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
+    private Sensor mAccelerometer, mGyroscope;
 
     /**
      * Called when the activity is first created.
@@ -40,6 +40,7 @@ public class Main extends Activity implements SensorEventListener {
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        mGyroscope = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
     }
 
     protected void onResume() {
@@ -65,6 +66,9 @@ public class Main extends Activity implements SensorEventListener {
         TextView tvX = (TextView) findViewById(R.id.x_axis);
         TextView tvY = (TextView) findViewById(R.id.y_axis);
         TextView tvZ = (TextView) findViewById(R.id.z_axis);
+        TextView gX = (TextView) findViewById(R.id.gyro_x);
+        TextView gY = (TextView) findViewById(R.id.gyro_y);
+        TextView gZ = (TextView) findViewById(R.id.gyro_z);
         ImageView iv = (ImageView) findViewById(R.id.image);
         float x = event.values[0];
         float y = event.values[1];
@@ -99,10 +103,19 @@ public class Main extends Activity implements SensorEventListener {
                 iv.setVisibility(View.INVISIBLE);
             }
         }
+        mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
+        float xg = event.values[0];
+        float yg = event.values[1];
+        float zg = event.values[2];
+        gX.setText(Float.toString(xg));
+        gY.setText(Float.toString(yg));
+        gZ.setText(Float.toString(zg));
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
 
         SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss");
         String format = date.format(new Date());
-        String entry = Float.toString(deltaX) + "," + Float.toString(deltaY) + "," + Float.toString(deltaZ) + "," + format + "\n";
+        String entry = Float.toString(deltaX) + "," + Float.toString(deltaY) + "," + Float.toString(deltaZ) + "," + Float.toString(xg) + "," + Float.toString(yg) + "," + Float.toString(zg) + "," + format + "\n";
         String state = Environment.getExternalStorageState();
 
         if (Environment.MEDIA_MOUNTED.equals(state)) {
